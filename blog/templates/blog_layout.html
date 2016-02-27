@@ -1,10 +1,15 @@
 <!-- blog/templates/blog_layout.html-->
+{% load bootstrap3 %}
 <!DOCTYPE HTML>
 <html>
   <head>
     <title>{% block page_title %}Insta blog에 오신것을 환영합니다.{% endblock %}</title>
     <meta charset="UTF-8"/>
     <!--<link href="css/style.css" rel="stylesheet" type="text/css">-->
+    {% bootstrap_css %}
+
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    {% bootstrap_javascript %}
     {% block javascript %}{% endblock %}
     <style type="text/css">
     .post-container{
@@ -24,7 +29,7 @@
     }
     </style>
   </head>
-  <body>
+  <body class="container">
     {% block content %}{% endblock %}
   </body>
 </html>

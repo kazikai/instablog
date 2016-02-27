@@ -1,25 +1,27 @@
 {% extends 'blog_layout.html' %}
 <!-- blog/templates/create_post.html-->
+  {% load bootstrap3 %}
   {% block page_title %}글 작성하기 {% endblock %}
   {% block content %}
-    <form method="POST" action="">
+    <form method="POST" action="" class="form-horizontal">
       {% csrf_token %}
-      <p>
-        <select name="category">
-          {% for category in categories %}
-          <option value="{{ category.pk }}">{{ category.name }}</option>
-          {% endfor %}
-        </select>
-      </p>
-      <p>
-        <label for="blog-title">글 제목<label>
-        <input type="text" name="title" id="blog-title">
-      </p>
-      <p>
-        <textarea id="blog-content" name="content"></textarea>
-      </p>
-      <p>
-        <button type="submit">저장</button>
-      </p>
+      <div class="form-group form-group-sm">
+        <p>
+          <select name="category" class="form-control input-sm">
+            {% for category in categories %}
+            <option value="{{ category.pk }}">{{ category.name }}</option>
+            {% endfor %}
+          </select>
+        </p>
+        <p>
+          <input type="text" name="title" id="blog-title" class="form-control" placeholder="글 제목">
+        </p>
+        <p>
+          <textarea id="blog-content" name="content" class="form-control"></textarea>
+        </p>
+        <p>
+          {% bootstrap_button "저장" button_type="submit" button_class="btn-primary" %}
+        </p>
+      </div>
     </form>
   {% endblock %}

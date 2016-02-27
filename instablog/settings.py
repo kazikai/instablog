@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'instablog',
     'blog',
+    'bootstrap3',
 ]
 
 MIDDLEWARE_CLASSES = [

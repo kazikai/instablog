@@ -1,5 +1,7 @@
+
 {% extends 'blog_layout.html' %}
 <!-- blog/templates/list_posts.html-->
+  {% load bootstrap3 %}
   {% block page_title %}글 목록 {% endblock %}
 
   {% block content %}
@@ -20,7 +22,8 @@
     <p>
       <a href="posts/create/" class="create-button">글 작성하기</a>
     </p>
-    <div>
+      <!--
+      <div>
       {% if posts.has_previous %}
       <span><a href="?page={{ posts.previous_page_number }}">이전 쪽</a></span>
       {% endif %}
@@ -28,5 +31,7 @@
       {% if posts.has_next %}
       <span><a href="?page={{ posts.next_page_number }}">다음 쪽</a></span>
       {% endif %}
-    </div>
+      </div>
+      -->
+    {% bootstrap_pagination posts %}
 {% endblock %}
