@@ -1,0 +1,17 @@
+<!-- blog/templates/view_post.html-->
+{% extends 'blog_layout.html' %}
+<!-- blog/templates/list_posts.html-->
+  {% block page_title %}글 보기{% endblock %}
+
+  {% block content %}
+    <div class="post-container">
+      <h3>{{ post.title }}</h3>
+      <div class="post-content">
+        {{ post.content }}.
+      </div>
+      <div>
+        <p> 글 갈래 : {{ post.category.name }}</p>
+        <p> 작성 일시: {{ post.created_at }}</p>
+      </div>
+    </div>
+  {% endblock %}

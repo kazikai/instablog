@@ -1,0 +1,25 @@
+{% extends 'blog_layout.html' %}
+<!-- blog/templates/create_post.html-->
+  {% block page_title %}글 작성하기 {% endblock %}
+  {% block content %}
+    <form method="POST" action="">
+      {% csrf_token %}
+      <p>
+        <select name="category">
+          {% for category in categories %}
+          <option value="{{ category.pk }}">{{ category.name }}</option>
+          {% endfor %}
+        </select>
+      </p>
+      <p>
+        <label for="blog-title">글 제목<label>
+        <input type="text" name="title" id="blog-title">
+      </p>
+      <p>
+        <textarea id="blog-content" name="content"></textarea>
+      </p>
+      <p>
+        <button type="submit">저장</button>
+      </p>
+    </form>
+  {% endblock %}

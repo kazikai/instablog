@@ -1,0 +1,30 @@
+<!-- blog/templates/blog_layout.html-->
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>{% block page_title %}Insta blog에 오신것을 환영합니다.{% endblock %}</title>
+    <meta charset="UTF-8"/>
+    <!--<link href="css/style.css" rel="stylesheet" type="text/css">-->
+    {% block javascript %}{% endblock %}
+    <style type="text/css">
+    .post-container{
+      border: 1px solid #000;
+      background-color: #7FFFD4;
+    }
+    .post-content{
+      border: 1px solid #000;
+      background-color: #00CED1;
+    }
+    .create-button{
+      display: block;
+      width: 100%;
+      border: 1px solid;
+      text-decoration: initial;
+      text-align: center;
+    }
+    </style>
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+</html>
