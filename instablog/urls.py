@@ -18,7 +18,9 @@ from django.contrib import admin
 from blog import views as blog_views
 
 urlpatterns = [
+    url(r'^posts/delete/(?P<pk>[0-9]+)/$', blog_views.delete_post, name='delete_post'),
     url(r'^posts/create/$', blog_views.create_post, name='create_post'),
+    url(r'^comment/delete/(?P<pk1>[0-9]+)/(?P<pk2>[0-9]+)$', blog_views.delete_comment, name='delete_comment'),
     url(r'^$', blog_views.list_posts),
     #아래 url패턴에 대해서는 view_post라는 이름이 만들어진다.
     url(r'^posts/(?P<pk>[0-9]+)/$', blog_views.view_post, name='view_post'),

@@ -3,6 +3,9 @@
 {% load bootstrap3 %}
   {% block page_title %}글 보기{% endblock %}
   {% block content %}
+    <div class="post-list-button">
+      <a href="/">전체 글 보기</a>
+    </div>
     <div class="post-container">
       <h3>{{ post.title }}</h3>
       <div class="post-content">
@@ -13,12 +16,30 @@
         <p> 작성 일시: {{ post.created_at }}</p>
       </div>
     </div>
+    <div class="post-delete-button">
+        <a href="/posts/delete/{{post.pk}}">글 삭제</a>
+    </div>
     <div class="comment_container">
+      <h4>댓글 목록</h4>
       {% for comment in post.comment_set.all %}
-      <div class="comment_info">{{ comment.pk }} {{ comment.user}} </div>
-      <div class="comment_content">{{ comment.content }}</div>
+      <div class="comment_info">{{ comment.user}} </div>
+      <div class="comment_content">
+        <span>{{ comment.content }}</span>
+        <a href="/comment/delete/{{ comment.post.pk }}/{{ comment.pk }}" class="btn btn-primary">삭제</a>
+      </div>
       {% empty %}
       <p>댓글 없음 </p>
       {% endfor %}
+    </div>
+    <div class="comment">
+      <form method="POST" action="" class="form-horizontal" style="margin:13px;">
+        {% csrf_token %}
+        <div class="form-group form-group-sm">
+          <textarea placeholder="댓글" name="comment" class="form-control"></textarea>
+          <div class="form-wrapper">
+            {% bootstrap_button "댓글 등록" button_type="submit" button_class="btn-primary" %}
+          </div>
+        </div>
+      </form>
     </div>
   {% endblock %}

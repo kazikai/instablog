@@ -1,0 +1,21 @@
+{% extends 'blog_layout.html' %}
+<!-- blog/templates/delete_post.html-->
+  {% load bootstrap3 %}
+  {% block page_title %}글 삭제하기 {% endblock %}
+  {% block content %}
+    <div class="panel panel-danger" style="margin-top:20px;">
+      <div class="panel-heading">
+        <h3 class="panel-title">POST 글 삭제 </h3>
+      </div>
+      <div class="panel-body"> 정말로 삭제 하실건가요? </div>
+      <div class="panel-footer">
+        <form method="POST" action="" class="form-horizontal" style="margin:13px;">
+          {% csrf_token %}
+          <div class="form-group form-group-sm">
+              {% bootstrap_button "삭제" button_type="submit" button_class="btn-primary" %}
+              {% bootstrap_button "메인으로가기" button_type="link" href="/" button_class="btn-primary" %}
+          </div>
+        </form>
+      </div>
+    </div>
+  {% endblock %}

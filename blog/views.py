@@ -7,6 +7,7 @@ from django.core.paginator import PageNotAnInteger
 from django.core.paginator import EmptyPage
 
 from .models import Post
+from .models import Comment
 from .models import Category
 # Create your views here.
 
@@ -19,7 +20,6 @@ def hello_with_template(request):
 def list_posts(request):
     per_page = 2
     current_page = request.GET.get('page', 1)
-
     #try:
         #request.GET 에 쿼리스트링 값이 저장된다.
         #current_page = request.GET.get('page', 1)
@@ -35,7 +35,6 @@ def list_posts(request):
         pg = page.page( 1 )
     except EmptyPage:
         pg = []
-
     #post_list = post_list[(current_page-1)*per_page:current_page*per_page]
 
     #start_offset = ( current_page - 1 ) * per_page
@@ -45,13 +44,44 @@ def list_posts(request):
         #'posts': post_list,
         'posts': pg,
     })
+def delete_comment(request, pk1, pk2):
+    if request.method == 'GET':
+        comment = get_object_or_404( Comment, pk=pk2 )
+        comment.delete()
+        return redirect( 'view_post', pk=pk1 );
 
+def create_comment(request, post, pk):
+    comment = Comment()
+    comment.post = post
+    comment.content = request.POST.get('comment')
+    if comment.content is None:
+        pass
+    else:
+        comment.save()
+
+# 포스트 보기
 def view_post(request, pk):
     post = get_object_or_404( Post, pk=pk )
-    return render(request, 'view_post.html', {
-        'post': post,
-    })
+    if request.method == 'GET':
+        return render(request, 'view_post.html', {
+            'post': post,
+            })
+    elif request.method == 'POST':
+        create_comment( request, post, pk )
+        return redirect('view_post', pk=post.pk)
 
+# 포스트 삭제
+def delete_post(request, pk):
+    post = get_object_or_404( Post, pk=pk )
+    if request.method == 'GET':
+        pass
+    elif request.method == 'POST':
+        post.delete()
+        return redirect( '/' );
+    return render(request, 'delete_post.html',{
+        'post': pk
+    })
+# 포스트 만들기
 def create_post(request):
     categories = Category.objects.all();
     if request.method == 'GET':
