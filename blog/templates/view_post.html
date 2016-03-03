@@ -16,6 +16,9 @@
         <p> 작성 일시: {{ post.created_at }}</p>
       </div>
     </div>
+    <div class="post-edit-button">
+        <a href="/posts/edit/{{post.pk}}">글 수정</a>
+    </div>
     <div class="post-delete-button">
         <a href="/posts/delete/{{post.pk}}">글 삭제</a>
     </div>

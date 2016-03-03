@@ -58,6 +58,23 @@ def create_comment(request, post, pk):
         pass
     else:
         comment.save()
+# 포스트 보기
+def edit_post(request, pk):
+    post = get_object_or_404( Post, pk=pk )
+    categories = Category.objects.all()
+    if request.method == 'GET':
+        return render(request, 'edit_post.html', {
+            'post': post,
+            'categories': categories,
+            })
+    elif request.method == 'POST':
+        post_edit = request.POST
+        post.title = post_edit['title']
+        post.content = post_edit['content']
+        category = get_object_or_404(Category, pk=post_edit['category'])
+        post.category = category
+        post.save()
+        return redirect('view_post', pk=post.pk)
 
 # 포스트 보기
 def view_post(request, pk):
@@ -83,7 +100,7 @@ def delete_post(request, pk):
     })
 # 포스트 만들기
 def create_post(request):
-    categories = Category.objects.all();
+    categories = Category.objects.all()
     if request.method == 'GET':
         pass
     elif request.method == 'POST':

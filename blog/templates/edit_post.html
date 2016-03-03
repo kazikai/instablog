@@ -1,0 +1,30 @@
+<!-- blog/templates/view_post.html-->
+{% extends 'blog_layout.html' %}
+{% load bootstrap3 %}
+  {% block page_title %}글 수정{% endblock %}
+  {% block content %}
+    <div class="post-list-button">
+      <a href="/posts/{{post.pk}}">글 보기로 가기</a>
+    </div>
+      <form method="POST" action="" class="form-horizontal" style="margin-top:10px;">
+        {% csrf_token %}
+        <div class="form-group form-group-sm">
+          <p>
+            <select name="category" class="form-control input-sm">
+              {% for category in categories %}
+              <option value="{{ category.pk }}">{{ category.name }}</option>
+              {% endfor %}
+            </select>
+          </p>
+          <p>
+            <input type="text" name="title" id="blog-title" class="form-control" placeholder="글 제목" value="{{ post.title }}">
+          </p>
+          <p>
+            <textarea id="blog-content" name="content" class="form-control">{{ post.content }}</textarea>
+          </p>
+          <p>
+            {% bootstrap_button "수정" button_type="submit" button_class="btn-primary" %}
+          </p>
+        </div>
+      </form>
+  {% endblock %}
