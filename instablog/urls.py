@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from blog import views as blog_views
-
+#이 부분은 url 로 접속했을때 정규 표현식으로 어떻게 분기 처리할지 결정해주는 부분 
 urlpatterns = [
     url(r'^posts/delete/(?P<pk>[0-9]+)/$', blog_views.delete_post, name='delete_post'),
     url(r'^posts/create/$', blog_views.create_post, name='create_post'),

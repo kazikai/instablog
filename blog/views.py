@@ -9,6 +9,9 @@ from django.core.paginator import EmptyPage
 from .models import Post
 from .models import Comment
 from .models import Category
+
+from .forms import PostForm
+from .forms import PostEditForm
 # Create your views here.
 
 def hello(request):
@@ -102,14 +105,13 @@ def delete_post(request, pk):
 def create_post(request):
     categories = Category.objects.all()
     if request.method == 'GET':
-        pass
+        form = PostEditForm()
     elif request.method == 'POST':
-        post = Post()
-        post.title = request.POST.get('title')
-        post.content = request.POST.get('content')
-        post.category = get_object_or_404( Category, pk=request.POST.get('category') )
-        post.save()
-        return redirect('view_post', pk=post.pk)
+        form = PostEditForm( request.POST )
+        if form.is_valid():
+            post = form.save()
+            return redirect('view_post', pk=post.pk)
     return render(request, 'create_post.html',{
         'categories': categories,
-        } )
+        'form': form,
+    } )

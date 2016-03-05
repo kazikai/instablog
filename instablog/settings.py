@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'instablog',
     'blog',
     'bootstrap3',
+    'profiles',
 ]
 
 MIDDLEWARE_CLASSES = [
